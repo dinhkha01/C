@@ -61,6 +61,12 @@ build CMakeFiles/C.dir/ss1/bài_1.c.obj: C_COMPILER__C_unscanned_Debug C$:/Users/
   OBJECT_DIR = CMakeFiles\C.dir
   OBJECT_FILE_DIR = CMakeFiles\C.dir\ss1
 
+build CMakeFiles/C.dir/ss1/bài_2.c.obj: C_COMPILER__C_unscanned_Debug C$:/Users/Admin/CLionProjects/C/ss1/bài$ 2.c || cmake_object_order_depends_target_C
+  DEP_FILE = CMakeFiles\C.dir\ss1\bài_2.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\C.dir
+  OBJECT_FILE_DIR = CMakeFiles\C.dir\ss1
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target C
@@ -69,7 +75,7 @@ build CMakeFiles/C.dir/ss1/bài_1.c.obj: C_COMPILER__C_unscanned_Debug C$:/Users/
 #############################################
 # Link the static library libC.a
 
-build libC.a: C_STATIC_LIBRARY_LINKER__C_Debug CMakeFiles/C.dir/library.c.obj CMakeFiles/C.dir/ss1/bài_1.c.obj
+build libC.a: C_STATIC_LIBRARY_LINKER__C_Debug CMakeFiles/C.dir/library.c.obj CMakeFiles/C.dir/ss1/bài_1.c.obj CMakeFiles/C.dir/ss1/bài_2.c.obj
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles\C.dir
   POST_BUILD = cd .
