@@ -17,7 +17,7 @@ int main(){
     }
     else {
         nghiem = (double)-b/a;
-        printf("\n-> phuong trinh tren co nghiem la: x = %0.2f\n",nghiem);
+        printf("\n-> phuong trinh tren co nghiem la: x = %.2f\n",nghiem);
     }
     return 0;
 }
