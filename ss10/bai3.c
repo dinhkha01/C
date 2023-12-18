@@ -1,9 +1,8 @@
 #include <stdio.h>
 int bolimdrome(int n){
     int sum=0;
-    int  temp;
-    int ss=n;
-    while (n!=0){
+    int  temp,ss=n;
+    while (n>0){
         temp=n%10;
         sum=(sum*10)+temp;
         n/=10;
