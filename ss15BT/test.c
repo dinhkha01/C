@@ -6,10 +6,10 @@ bool isFibonacci(int n) {
         return true;
     }
     int a = 0, b = 1, c = a + b;
-    while (c < n) {
-        a = b;
-        b = c;
-        c = a + b;
+    while (c < n) {//3//3
+        a = b;//1/1/2
+        b = c;//1/2/3
+        c = a + b;//2//3/5
     }
     return c == n;
 }
