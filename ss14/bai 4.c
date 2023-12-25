@@ -16,6 +16,7 @@ void inmang(int a[], int n){
 }
 
 void saochepmang(int a[], int b[], int n){
+
     memcpy( (void*)b, (void*)a , n* sizeof(int ) );
 }
 
