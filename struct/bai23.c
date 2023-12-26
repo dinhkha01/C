@@ -26,27 +26,24 @@ void sosanhtn(thanhpho a[], int n ){
     }
     printf("thanh pho co thu nhap cao nhat la : %s ",a[e].ten);
 }
-int main(){
+int main() {
     int n;
     printf("nha so thanh pho : ");
-    scanf("%d",&n);
+    scanf("%d", &n);
     thanhpho a[n];
     for (int i = 0; i < n; ++i) {
-        printf("nhap chi tiet thanh pho thu %d\n",i);
+        printf("nhap chi tiet thanh pho thu %d\n", i);
         printf("nha ten thanh pho: ");
-        scanf("%s",a[i].ten);
+        getchar();
+        gets(a[i].ten);
         printf("nhap tong so dan: ");
-        scanf("%d",&a[i].sodan);
+        scanf("%d", &a[i].sodan);
         printf("nhap ti le biet doc viet: ");
-        scanf("%lf",&a[i].doc);
+        scanf("%lf", &a[i].doc);
         printf("nhap tong thu nhap: ");
-        scanf("%d",&a[i].tongthunhap);
+        scanf("%d", &a[i].tongthunhap);
     }
-    sosanhdoc(a,n);
-    sosanhtn(a,n);
+    sosanhdoc(a, n);
+    sosanhtn(a, n);
     return 0;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1ce6a5ff71a8949b934b6efdbd892d00d28417f4
