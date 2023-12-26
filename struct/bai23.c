@@ -45,8 +45,4 @@ int main(){
     sosanhdoc(a,n);
     sosanhtn(a,n);
     return 0;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1ce6a5ff71a8949b934b6efdbd892d00d28417f4
