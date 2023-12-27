@@ -5,7 +5,7 @@
 typedef struct {
     char maSach[50];
     char tenSach[50];
-    // Thêm các thông tin khác của sách nếu cần
+
 } Book;
 
 Book books[100];
@@ -19,7 +19,7 @@ void nhapSach() {
         scanf("%s", books[i].maSach);
         printf("Nhap ten sach: ");
         scanf("%s", books[i].tenSach);
-        // Nhập các thông tin khác của sách nếu có
+
     }
 }
 
@@ -27,7 +27,7 @@ void hienThiSach() {
     for (int i = 0; i < soLuongSach; i++) {
         printf("Ma sach: %s\n", books[i].maSach);
         printf("Ten sach: %s\n", books[i].tenSach);
-        // Hiển thị các thông tin khác của sách nếu có
+
     }
 }
 
@@ -39,13 +39,12 @@ void themSach(int viTri) {
     for (int i = soLuongSach; i > viTri; i--) {
         strcpy(books[i].maSach, books[i - 1].maSach);
         strcpy(books[i].tenSach, books[i - 1].tenSach);
-        // Sao chép các thông tin khác của sách nếu có
+
     }
     printf("Nhap ma sach: ");
     scanf("%s", books[viTri].maSach);
     printf("Nhap ten sach: ");
     scanf("%s", books[viTri].tenSach);
-    // Nhập các thông tin khác của sách nếu có
     soLuongSach++;
 }
 
@@ -64,7 +63,6 @@ void xoaSach(char* maSach) {
     for (int i = viTri; i < soLuongSach - 1; i++) {
         strcpy(books[i].maSach, books[i + 1].maSach);
         strcpy(books[i].tenSach, books[i + 1].tenSach);
-        // Sao chép các thông tin khác của sách nếu có
     }
     soLuongSach--;
 }
