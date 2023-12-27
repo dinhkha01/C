@@ -5,26 +5,22 @@ typedef struct {
     int sodan,tongthunhap;
 }thanhpho;
 void sosanhdoc(thanhpho a[], int n ){
-    int c;
-    for (int i = 0; i < n; ++i) {
-        for (int j = i+1; j <n ; ++j) {
-            if(a[i].doc < a[j].doc){
-                c= j ;
-           }
-        }
+    int doc=0;
+    for (int i = 1; i < n; ++i) {
+       if(a[doc].doc < a[i].doc){
+           doc=i;
+       }
     }
-    printf("thanh pho co ti le biet doc cao nhat la : %s\n",a[c].ten);
+    printf("thanh pho co ti le biet doc cao nhat la : %s\n",a[doc].ten);
 }
 void sosanhtn(thanhpho a[], int n ){
-    int e;
-    for (int i = 0; i < n; ++i) {
-        for (int j = i+1; j < n ; ++j) {
-            if(a[i].tongthunhap < a[j].tongthunhap){
-                e = j ;
-            } else e=i ;
+    int thunhap=0;
+    for (int i = 1; i < n; ++i) {
+        if(a[thunhap].tongthunhap < a[i].tongthunhap){
+            thunhap = i;
         }
     }
-    printf("thanh pho co thu nhap cao nhat la : %s ",a[e].ten);
+    printf("thanh pho co thu nhap cao nhat la : %s ",a[thunhap].ten);
 }
 int main() {
     int n;
