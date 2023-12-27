@@ -4,7 +4,7 @@ typedef struct {
     double doc;
     int sodan,tongthunhap;
 }thanhpho;
-void sosanhdoc(thanhpho a[], int n ){
+void sosanhTiLeDoc(thanhpho a[], int n ){
     int doc=0;
     for (int i = 1; i < n; ++i) {
        if(a[doc].doc < a[i].doc){
@@ -13,7 +13,7 @@ void sosanhdoc(thanhpho a[], int n ){
     }
     printf("thanh pho co ti le biet doc cao nhat la : %s\n",a[doc].ten);
 }
-void sosanhtn(thanhpho a[], int n ){
+void sosanhThuNhap(thanhpho a[], int n ){
     int thunhap=0;
     for (int i = 1; i < n; ++i) {
         if(a[thunhap].tongthunhap < a[i].tongthunhap){
@@ -39,7 +39,7 @@ int main() {
         printf("nhap tong thu nhap: ");
         scanf("%d", &a[i].tongthunhap);
     }
-    sosanhdoc(a, n);
-    sosanhtn(a, n);
+    sosanhThuNhap(a, n);
+    sosanhTiLeDoc(a, n);
     return 0;
 }
