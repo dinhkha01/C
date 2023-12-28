@@ -8,6 +8,7 @@ typedef struct {
     char content[100];
     bool status;
 } CDlist;
+
 void in(CDlist cd[], int n) {
     for (int i = 0; i < n; ++i) {
         printf("CD thu %d: %d %s %.2f %s - %s   ", i + 1, cd[i].id, cd[i].name, cd[i].duration,
@@ -15,6 +16,7 @@ void in(CDlist cd[], int n) {
     }
     printf("\n");
 }
+
 void themMoiCD(CDlist cd[], int *n) {
     printf("\nNhap thong tin CD moi:\n");
     printf("nhap id : ");
@@ -29,6 +31,7 @@ void themMoiCD(CDlist cd[], int *n) {
     (*n)++;
     printf("Them CD moi thanh cong!\n\n");
 }
+
 void nhapthongtinmoi(CDlist cd[], int n, char m[]) {
     int i;
     printf("moi nhap ten cd muon chinh sua: ");
@@ -85,14 +88,25 @@ void timKiemNhiPhanCD(CDlist cd[], int n) {
     char tenCD[50];
     printf("Nhap ten CD can tim kiem: ");
     scanf(" %[^\n]s", tenCD);
+    CDlist key;
+    for (int i = 1; i < n; ++i) {
+        key = cd[i];
+        int j = i - 1;
+        while (j >= 0 && strcmp(cd[j].name, key.name) > 0) {
+            cd[j + 1] = cd[j];
+            j = j - 1;
+        }
+        cd[j + 1] = key;
+    }
     int trai = 0, phai = n - 1;
     int timThayIndex = -1;
     while (trai <= phai) {
         int giua = trai + (phai - trai) / 2;
-        if (strcmp(cd[giua].name, tenCD) == 0) {
+        int ketQuaSoSanh = strcmp(cd[giua].name, tenCD);
+        if (ketQuaSoSanh == 0) {
             timThayIndex = giua;
             break;
-        } else if (strcmp(cd[giua].name, tenCD) < 0) {
+        } else if (ketQuaSoSanh < 0) {
             trai = giua + 1;
         } else {
             phai = giua - 1;
