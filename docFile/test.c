@@ -2,7 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 
-void standardizeName(char *name) {
+void viethoaten(char *name) {
     int i, j = 0;
     int len = strlen(name);
     int newWord = 1;
@@ -27,7 +27,7 @@ void standardizeName(char *name) {
 int main(void) {
     FILE *inputFile, *outputFile;
     char line[100];
-    int numStudents;
+    int sosv;
 
     if ((inputFile = fopen("sinhvien.txt", "r")) == NULL) {
         perror("Khong the mo file sinhvien.txt");
@@ -40,23 +40,23 @@ int main(void) {
         return 1;
     }
 
-    if (fscanf(inputFile, "%d", &numStudents) != 1) {
+    if (fscanf(inputFile, "%d", &sosv) != 1) {
         fprintf(stderr, "Loi doc so sinh vien tu file\n");
         fclose(inputFile);
         fclose(outputFile);
         return 1;
     }
 
-    fprintf(outputFile, "%d\n", numStudents);
+    fprintf(outputFile, "%d\n", sosv);
 
-    for (int i = 0; i < numStudents; i++) {
+    for (int i = 0; i < sosv; i++) {
         if (fscanf(inputFile, " %[^\n]s", line) != 1) {
             fprintf(stderr, "Loi doc dong sinh vien thu %d tu file\n", i + 1);
             fclose(inputFile);
             fclose(outputFile);
             return 1;
         }
-        standardizeName(line);
+        viethoaten(line);
         fprintf(outputFile, "%s\n", line);
     }
 
