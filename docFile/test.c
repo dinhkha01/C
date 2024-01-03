@@ -29,36 +29,48 @@ int main(void) {
     char line[100];
     int numStudents;
 
-
     if ((inputFile = fopen("sinhvien.txt", "r")) == NULL) {
-        perror("Không thể mở file sinhvien.txt");
+        perror("Khong the mo file sinhvien.txt");
         return 1;
     }
 
-
     if ((outputFile = fopen("sinhvien_out.txt", "w")) == NULL) {
-        perror("Không thể mở file sinhvien_out.txt");
+        perror("Khong the mo file sinhvien_out.txt");
         fclose(inputFile);
         return 1;
     }
 
-
-    fscanf(inputFile, "%d", &numStudents);
-
+    if (fscanf(inputFile, "%d", &numStudents) != 1) {
+        fprintf(stderr, "Loi doc so sinh vien tu file\n");
+        fclose(inputFile);
+        fclose(outputFile);
+        return 1;
+    }
 
     fprintf(outputFile, "%d\n", numStudents);
 
-
     for (int i = 0; i < numStudents; i++) {
-        fscanf(inputFile, " %[^\n]s", line);
+        if (fscanf(inputFile, " %[^\n]s", line) != 1) {
+            fprintf(stderr, "Loi doc dong sinh vien thu %d tu file\n", i + 1);
+            fclose(inputFile);
+            fclose(outputFile);
+            return 1;
+        }
         standardizeName(line);
         fprintf(outputFile, "%s\n", line);
     }
 
-    fclose(inputFile);
-    fclose(outputFile);
+    if (fclose(inputFile) == EOF) {
+        perror("Loi khi dong file dau vào");
+        return 1;
+    }
 
-    printf("da tao file theo yeu cau.\n");
+    if (fclose(outputFile) == EOF) {
+        perror("Loi khi dong file đau ra");
+        return 1;
+    }
+
+    printf("Da tao file theo yeu cau.\n");
 
     return 0;
 }
