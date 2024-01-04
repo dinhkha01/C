@@ -11,8 +11,8 @@ typedef struct {
 int compare(const void *a, const void *b) {
     SinhVien *svA = (SinhVien *)a;
     SinhVien *svB = (SinhVien *)b;
-    const float n = 0.00001;
-    if (fabs(svB->gpa - svA->gpa) < n) {
+
+    if (fabs(svB->gpa - svA->gpa) < 0) {
         return 0;
     } else if (svB->gpa - svA->gpa > 0) {
         return 1;
