@@ -114,7 +114,7 @@ void chuanHoa(char *name) {
     }
 }
 void ghiDuLieuVaoFile(book a[], int n) {
-    FILE *fp = fopen("book.txt", "a");
+    FILE *fp = fopen("book.txt", "w");
     if (fp != NULL) {
             fprintf(fp,"\n| %-10s | %-18s | %-13s | %-13s | %-13s |\n", "Ma sach", "Ten sach", "Tac gia", "Gia tien", "The loai");
             fprintf(fp,"|---------------------------------------------------------------------------------|\n");
@@ -184,9 +184,9 @@ void add(book a[], int *n) {
 
 
 void in(book a[], int n) {
-    printf("%-20s%-20s%-20s%-20s%-10s\n", "masach", "Tensach", "tacgia", "theloai", "gia");
+    printf("%-20s%-20s%-20s%-20s%-10s\n", "masach", "Tensach", "tacgia", "gia", "theloai");
     for (int i = 0; i < n; ++i) {
-        printf("%-20s%-20s%-20s%-20s%-10d\n", a[i].maSach, a[i].name, a[i].tacGia, a[i].theLoai, a[i].gia);
+        printf("%-20s%-20s%-20s%-20d%-10s\n", a[i].maSach, a[i].name, a[i].tacGia, a[i].gia, a[i].theLoai);
     }
 }
 
@@ -295,8 +295,8 @@ void timKiemSachTheoTacGia(book a[], int n) {
     printf("\nKet qua tim kiem theo tac gia '%s':\n", tacgia);
     for (int i = 0; i < n; i++) {
         if (strstr(a[i].tacGia, tacgia) != NULL) {
-            printf("%s | %s | %s | %s | %d\n", a[i].maSach, a[i].name,
-                   a[i].tacGia, a[i].theLoai, a[i].gia);
+            printf("%s | %s | %s | %d | %s\n", a[i].maSach, a[i].name,
+                   a[i].tacGia, a[i].gia, a[i].theLoai);
             found = 1;
         }
     }
@@ -313,17 +313,17 @@ void timKiemSachTheoKhoangGia(book a[], int n) {
     printf("Nhap gia cao nhat: ");
     scanf("%d", &giaMax);
 
-    int found = 0;
+    int test = 0;
     printf("\nKet qua tim kiem trong khoang gia %d-%d:\n", giaMin, giaMax);
     for (int i = 0; i < n; ++i) {
         if (a[i].gia >= giaMin && a[i].gia <= giaMax) {
-            printf("%s | %s | %s | %s | %d\n", a[i].maSach, a[i].name,
-                   a[i].tacGia, a[i].theLoai, a[i].gia);
-            found = 1;
+            printf("%s | %s | %s | %d | %s\n", a[i].maSach, a[i].name,
+                   a[i].tacGia, a[i].gia, a[i].theLoai);
+            test = 1;
         }
     }
 
-    if (!found) {
+    if (!test) {
         printf("Trong khoang gia nay khong tim thay sach nao!!!\n");
     }
 }
