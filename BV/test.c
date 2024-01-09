@@ -17,7 +17,7 @@ void in(book a[], int n);
 void ghiDuLieuVaoFile(book a[], int n);
 void capNhatThongTinSach(book a[], int n);
 void xoaSachTheoID(book a[], int *n);
-void sapxep(book a[], int n);
+void sapxeptang(book a[], int n);
 void timKiemSachTheoTacGia(book a[], int n);
 
 int main() {
@@ -41,7 +41,7 @@ int main() {
                 in(a, n);
                 break;
             case 5:
-                sapxep(a, n);
+                sapxeptang(a, n);
                 break;
             case 6:
                 timKiemSachTheoTacGia(a, n);
@@ -58,7 +58,7 @@ void menu() {
     printf("**  2. Cap nhat thong tin sach boi ID.               **\n");
     printf("**  3. Xoa sach boi ID.                              **\n");
     printf("**  4. Hien thi thong tin sach.                      **\n");
-    printf("**  5. Sap xep sach theo gia.                        **\n");
+    printf("**  5. Sap xep sach theo gia tang dan.               **\n");
     printf("**  6. Tim kiem sach theo ten tac gia.               **\n");
     printf("**  7. Tim kiem sach theo khoang gia.                **\n");
     printf("**  8. Thoat.                                        **\n");
@@ -191,16 +191,34 @@ void xoaSachTheoID(book a[], int *n) {
     }
 }
 
-void timKiemSachTheoTacGia(book a[], int n) {
-    char tacGia[max];
-    printf("Nhập tên tác giả cần tìm: ");
-    fgets(tacGia, sizeof(tacGia), stdin);
-    tacGia[strcspn(tacGia, "\n")] = '\0';  // Loại bỏ ký tự '\n' cuối chuỗi
-
-    printf("%-20s%-20s%-20s%-20s%-10s\n", "masach", "Tensach", "tacgia", "theloai", "gia");
-    for (int i = 0; i < n; i++) {
-        if (strcmp(a[i].tacGia, tacGia) == 0) {
-            printf("%-20s%-20s%-20s%-20s%-10d\n", a[i].maSach, a[i].name, a[i].tacGia, a[i].theLoai, a[i].gia);
+void sapxeptang(book a[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (a[j].gia > a[j+1].gia) {
+                book temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+            }
         }
+    }
+    in(a,n);
+}
+void timKiemSachTheoTacGia(book a[], int n) {
+    char tacgia[50];
+    printf("Nhap ten tac gia can tim kiem: ");
+    scanf(" %[^\n]", tacgia);
+
+    int found = 0;
+    printf("\nKet qua tim kiem theo tac gia '%s':\n", tacgia);
+    for (int i = 0; i < n; i++) {
+        if (strstr(a[i].tacGia, tacgia) != NULL) {
+            printf("%s | %s | %s | %s | %d\n", a[i].maSach, a[i].name,
+                   a[i].tacGia, a[i].theLoai, a[i].gia);
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf("Khong tim thay sach cua tac gia '%s'\n", tacgia);
     }
 }

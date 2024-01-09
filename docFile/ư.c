@@ -66,34 +66,18 @@ void menu() {
 }
 
 void add(book a[], int *n) {
-    printf("nhap vao do dai cua thu vien sach: ");
+    printf("nhap vao do dai cua thu vien sach : ");
     scanf("%d", n);
-    getchar();  // Đọc và loại bỏ ký tự '\n' thừa trong buffer
-
     for (int i = 0; i < *n; ++i) {
         printf("nhap thong tin sach thu %d: \n", i + 1);
-
-        // Ma Sach
-        printf("Ma Sach (5 ky tu): ");
-        fgets(a[i].maSach, sizeof(a[i].maSach), stdin);
-        a[i].maSach[strcspn(a[i].maSach, "\n")] = '\0';  // Loại bỏ ký tự '\n' cuối chuỗi
-
-        // Ten Sach
+        printf("Ma Sach: ");
+        scanf("%5s", a[i].maSach);
         printf("Ten Sach: ");
-        fgets(a[i].name, sizeof(a[i].name), stdin);
-        a[i].name[strcspn(a[i].name, "\n")] = '\0';
-
-        // Tac Gia Sach
+        scanf("%99s", a[i].name);
         printf("Tac gia Sach: ");
-        fgets(a[i].tacGia, sizeof(a[i].tacGia), stdin);
-        a[i].tacGia[strcspn(a[i].tacGia, "\n")] = '\0';
-
-        // The Loai Sach
+        scanf("%99s", a[i].tacGia);
         printf("The loai Sach: ");
-        fgets(a[i].theLoai, sizeof(a[i].theLoai), stdin);
-        a[i].theLoai[strcspn(a[i].theLoai, "\n")] = '\0';
-
-        // Gia Sach
+        scanf("%99s", a[i].theLoai);
         do {
             printf("Gia Sach: ");
             scanf("%d", &a[i].gia);
@@ -101,8 +85,6 @@ void add(book a[], int *n) {
                 printf("Gia sach khong hop le moi nhap lai: \n");
             }
         } while (a[i].gia < 1000);
-
-        getchar();  // Đọc và loại bỏ ký tự '\n' thừa trong buffer
     }
 }
 
@@ -129,29 +111,16 @@ void ghiDuLieuVaoFile(book *a, int n) {
 void capNhatThongTinSach(book a[], int n) {
     char maSach[6];
     printf("Nhap ma sach can cap nhat: ");
-    fgets(maSach, sizeof(maSach), stdin);
-    maSach[strcspn(maSach, "\n")] = '\0';  // Loại bỏ ký tự '\n' cuối chuỗi
-
+    scanf("%5s", maSach);
     for (int i = 0; i < n; i++) {
         if (strcmp(a[i].maSach, maSach) == 0) {
             printf("Nhap thong tin sach moi: \n");
-
-            // Ten sach
             printf("Ten sach: ");
-            fgets(a[i].name, sizeof(a[i].name), stdin);
-            a[i].name[strcspn(a[i].name, "\n")] = '\0';
-
-            // Tac gia
+            scanf("%99s", a[i].name);
             printf("Tac gia: ");
-            fgets(a[i].tacGia, sizeof(a[i].tacGia), stdin);
-            a[i].tacGia[strcspn(a[i].tacGia, "\n")] = '\0';
-
-            // The loai
+            scanf("%99s", a[i].tacGia);
             printf("The loai: ");
-            fgets(a[i].theLoai, sizeof(a[i].theLoai), stdin);
-            a[i].theLoai[strcspn(a[i].theLoai, "\n")] = '\0';
-
-            // Gia sach
+            scanf("%99s", a[i].theLoai);
             do {
                 printf("Gia sach: ");
                 scanf("%d", &a[i].gia);
@@ -159,7 +128,6 @@ void capNhatThongTinSach(book a[], int n) {
                     printf("Gia sach khong hop le, moi nhap lai: \n");
                 }
             } while (a[i].gia < 1000);
-
             printf("Cap nhat thong tin sach thanh cong!\n");
             return;
         }
@@ -170,9 +138,7 @@ void capNhatThongTinSach(book a[], int n) {
 void xoaSachTheoID(book a[], int *n) {
     char maSach[6];
     printf("Nhap ma sach can xoa: ");
-    fgets(maSach, sizeof(maSach), stdin);
-    maSach[strcspn(maSach, "\n")] = '\0';  // Loại bỏ ký tự '\n' cuối chuỗi
-
+    scanf("%5s", maSach);
     int i;
     for (i = 0; i < *n; i++) {
         if (strcmp(a[i].maSach, maSach) == 0) {
@@ -194,13 +160,24 @@ void xoaSachTheoID(book a[], int *n) {
 void timKiemSachTheoTacGia(book a[], int n) {
     char tacGia[max];
     printf("Nhập tên tác giả cần tìm: ");
-    fgets(tacGia, sizeof(tacGia), stdin);
-    tacGia[strcspn(tacGia, "\n")] = '\0';  // Loại bỏ ký tự '\n' cuối chuỗi
-
+    scanf("%99s", tacGia);
     printf("%-20s%-20s%-20s%-20s%-10s\n", "masach", "Tensach", "tacgia", "theloai", "gia");
     for (int i = 0; i < n; i++) {
         if (strcmp(a[i].tacGia, tacGia) == 0) {
             printf("%-20s%-20s%-20s%-20s%-10d\n", a[i].maSach, a[i].name, a[i].tacGia, a[i].theLoai, a[i].gia);
         }
     }
+}
+void sapxep(book a[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (a[j].gia > a[j + 1].gia) {
+
+                book temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
+            }
+        }
+    }
+    in(a, n);
 }
