@@ -27,14 +27,30 @@ void xoaDuLieu();
 int main() {
     int key, n = 0;
     book a[max];
+    char *k;
     do {
         menu();
-        printf("chuc nang ban muon chon (1-8): ");
-        scanf("%d", &key);
+        printf("choose (0-9): ");
+        fflush(stdin);
+        fgets(a, sizeof(a), stdin);
+
+        // Chuyển đổi chuỗi thành số nguyên
+        key = strtol(a, &k, 10);
+
+        // Kiểm tra giá trị trả về và xem có lỗi hay không
+        if (k != '\0' && k != '\n') {
+            printf("Nhap sai! Vui long nhap lai.\n");
+            continue;  // Lặp lại vòng lặp do-while để yêu cầu người dùng nhập lại
+        }
+
+        if (key < 0 || key > 9) {
+            printf("Nhap sai! Vui long nhap lai.\n");
+            continue;  // Lặp lại vòng lặp do-while để yêu cầu người dùng nhập lại
+        }
         switch (key) {
             case 1:
                 add(a, &n);
-                ghiDuLieuVaoFile(a, n);
+                ghiDuLieuVaoFile(a,n);
                 break;
             case 2:
                 capNhatThongTinSach(a, n);
@@ -130,7 +146,7 @@ void ghiDuLieuVaoFile(book a[], int n) {
     }
 }
 void add(book a[], int *n) {
-    int continueAdding;
+    int tiepTuc;
     do {
         printf("Nhap vao thong tin sach:\n");
 
@@ -148,6 +164,14 @@ void add(book a[], int *n) {
             fflush(stdin);
             fgets(a[*n].name, sizeof(a[*n].name), stdin);
             a[*n].name[strcspn(a[*n].name, "\n")] = '\0';
+            strcspn(a[*n].name, "\n");
+            /*Hàm này trả về độ dài của đoạn đầu tiên trong chuỗi a[*n].name không chứa các ký tự
+            trong tập hợp delimiters ("\n" trong trường hợp này). Đơn giản là nó tính vị trí của ký tự xuống dòng trong chuỗi.
+
+                    a[*n].name[strcspn(a[*n].name, "\n")] = '\0';: Ở đây, ký tự '\0' (null terminator) được gán vào vị
+                    trí mà ký tự xuống dòng ('\n') được tìm thấy. Điều này hiệu quả thay thế ký tự
+                    xuống dòng bằng null terminator, đồng thời giúp cắt chuỗi tại điểm đó.*/
+
         } while (strlen(a[*n].name) < 10);
 
 
@@ -170,16 +194,14 @@ void add(book a[], int *n) {
             getchar();  // Loại bỏ ký tự '\n' thừa trong buffer
         } while (a[*n].gia < 1000);
 
-        // Ghi dữ liệu vào file sau mỗi lần thêm sách
-
 
         (*n)++;
 
         printf("Ban co muon tiep tuc them sach? (1: Co, 0: Khong): ");
-        scanf("%d", &continueAdding);
+        scanf("%d", &tiepTuc);
         getchar();  // Loại bỏ ký tự '\n' thừa trong buffer
 
-    } while (continueAdding == 1);
+    } while (tiepTuc == 1);
 }
 
 
