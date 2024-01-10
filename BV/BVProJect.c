@@ -26,24 +26,24 @@ void timKiemSachTheoKhoangGia(book a[], int n);
 void xoaDuLieu();
 int main() {
     int key, n = 0;
-    book a[max];
+    book a[max],b[max];
     char *k;
     do {
         menu();
-        printf("choose (0-9): ");
+        printf("moi chon chuc nang (1-10): ");
         fflush(stdin);
-        fgets(a, sizeof(a), stdin);
+        fgets(b, sizeof(b), stdin);
 
         // Chuyển đổi chuỗi thành số nguyên
-        key = strtol(a, &k, 10);
+        key = strtol(b, &k, 10);
 
         // Kiểm tra giá trị trả về và xem có lỗi hay không
-        if (k != '\0' && k != '\n') {
+        if (*k != '\0' && *k != '\n') {
             printf("Nhap sai! Vui long nhap lai.\n");
             continue;  // Lặp lại vòng lặp do-while để yêu cầu người dùng nhập lại
         }
 
-        if (key < 0 || key > 9) {
+        if (key < 1 || key > 10) {
             printf("Nhap sai! Vui long nhap lai.\n");
             continue;  // Lặp lại vòng lặp do-while để yêu cầu người dùng nhập lại
         }
@@ -54,24 +54,31 @@ int main() {
                 break;
             case 2:
                 capNhatThongTinSach(a, n);
+                ghiDuLieuVaoFile(a,n);
                 break;
             case 3:
                 xoaSachTheoID(a, &n);
+                ghiDuLieuVaoFile(a,n);
                 break;
             case 4:
                 in(a, n);
+                ghiDuLieuVaoFile(a,n);
                 break;
             case 5:
                 sapXepGiam(a,n);
+                ghiDuLieuVaoFile(a,n);
                 break;
             case 6:
                 sapXepTang(a, n);
+                ghiDuLieuVaoFile(a,n);
                 break;
             case 7:
                 timKiemSachTheoTacGia(a, n);
+                ghiDuLieuVaoFile(a,n);
                 break;
             case 8:
                 timKiemSachTheoKhoangGia(a,n);
+                ghiDuLieuVaoFile(a,n);
                 break;
             case 9:
                 xoaDuLieu();
@@ -79,8 +86,6 @@ int main() {
             case 10:
                 printf("Thoat chuong trinh.\n");
                 break;
-            default:
-                printf("Chon chuc nang khong hop le. Vui long chon lai.\n");
         }
     } while (key != 10);
     return 0;
@@ -146,7 +151,7 @@ void ghiDuLieuVaoFile(book a[], int n) {
     }
 }
 void add(book a[], int *n) {
-    int tiepTuc;
+    int continueAdding;
     do {
         printf("Nhap vao thong tin sach:\n");
 
@@ -164,14 +169,6 @@ void add(book a[], int *n) {
             fflush(stdin);
             fgets(a[*n].name, sizeof(a[*n].name), stdin);
             a[*n].name[strcspn(a[*n].name, "\n")] = '\0';
-            strcspn(a[*n].name, "\n");
-            /*Hàm này trả về độ dài của đoạn đầu tiên trong chuỗi a[*n].name không chứa các ký tự
-            trong tập hợp delimiters ("\n" trong trường hợp này). Đơn giản là nó tính vị trí của ký tự xuống dòng trong chuỗi.
-
-                    a[*n].name[strcspn(a[*n].name, "\n")] = '\0';: Ở đây, ký tự '\0' (null terminator) được gán vào vị
-                    trí mà ký tự xuống dòng ('\n') được tìm thấy. Điều này hiệu quả thay thế ký tự
-                    xuống dòng bằng null terminator, đồng thời giúp cắt chuỗi tại điểm đó.*/
-
         } while (strlen(a[*n].name) < 10);
 
 
@@ -194,15 +191,18 @@ void add(book a[], int *n) {
             getchar();  // Loại bỏ ký tự '\n' thừa trong buffer
         } while (a[*n].gia < 1000);
 
+        // Ghi dữ liệu vào file sau mỗi lần thêm sách
+
 
         (*n)++;
 
         printf("Ban co muon tiep tuc them sach? (1: Co, 0: Khong): ");
-        scanf("%d", &tiepTuc);
+        scanf("%d", &continueAdding);
         getchar();  // Loại bỏ ký tự '\n' thừa trong buffer
 
-    } while (tiepTuc == 1);
+    } while (continueAdding == 1);
 }
+
 
 
 void in(book a[], int n) {
@@ -312,6 +312,7 @@ void timKiemSachTheoTacGia(book a[], int n) {
     char tacgia[max];
     printf("Nhap ten tac gia can tim kiem: ");
     scanf(" %[^\n]", tacgia);
+    chuanHoa(tacgia);
 
     int found = 0;
     printf("\nKet qua tim kiem theo tac gia '%s':\n", tacgia);
