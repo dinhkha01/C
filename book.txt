@@ -1,6 +1,4 @@
 
 | Ma sach    | Ten sach           | Tac gia       | Gia tien      | The loai      |
 |---------------------------------------------------------------------------------|
-| 12345      | Nguyen Dinh Kha    | Dinh Kha      | 2222          | Khong Biet    |
-| 34567      | Be Tho An Co       | Tho           | 2500          | Odis          |
-| 66666      | Vo Thi Diem Ha     | Ha Vo         | 3000          | Gai Xinh      |
+| 12345      | Djksagdjasdsad     | Djh           | 3333          | Dk            |

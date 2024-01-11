@@ -26,8 +26,8 @@ void timKiemSachTheoKhoangGia(book a[], int n);
 void xoaDuLieu();
 int main() {
     int key, n = 0;
-    book a[max],b[max];
-    char *k;
+    book a[max];
+    char *k,b[max];
     do {
         menu();
         printf("moi chon chuc nang (1-10): ");
@@ -212,8 +212,8 @@ void in(book a[], int n) {
 
 
 void capNhatThongTinSach(book a[], int n) {
-    char maSach[6];
-    printf("Nhap ma sach can cap nhat: ");
+    char maSach[max];
+    printf("Nhap ma sach can cap nhat (dung 5 ki tu) : ");
     fflush(stdin);
     fgets(maSach, sizeof(maSach), stdin);
     maSach[strcspn(maSach, "\n")] = '\0';
