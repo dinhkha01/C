@@ -1,4 +1,0 @@
-
-| Ma sach    | Ten sach           | Tac gia       | Gia tien      | The loai      |
-|---------------------------------------------------------------------------------|
-| 12345      | Djksagdjasdsad     | Djh           | 3333          | Dk            |

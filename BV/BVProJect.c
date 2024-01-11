@@ -108,10 +108,9 @@ void menu() {
 
 
 void chuanHoa(char *name) {
-    int i;
     int chuDau = 1;
 
-    for (i = 0; i < strlen(name); i++) {
+    for (int i = 0; i < strlen(name); i++) {
         if (isspace(name[i])) {
             chuDau = 1;  // Đặt lại khi gặp dấu cách
         } else {
@@ -135,10 +134,10 @@ void chuanHoa(char *name) {
 void ghiDuLieuVaoFile(book a[], int n) {
     FILE *fp = fopen("book.txt", "w");
     if (fp != NULL) {
-            fprintf(fp,"\n| %-10s | %-18s | %-13s | %-13s | %-13s |\n", "Ma sach", "Ten sach", "Tac gia", "Gia tien", "The loai");
-            fprintf(fp,"|---------------------------------------------------------------------------------|\n");
+            fprintf(fp,"\n| %-10s | %-30s | %-15s | %-13s | %-13s |\n", "Ma sach", "Ten sach", "Tac gia", "Gia tien", "The loai");
+            fprintf(fp,"|-----------------------------------------------------------------------------------------------|\n");
             for (int i = 0; i < n; i++) {
-                fprintf(fp,"| %-10s | %-18s | %-13s | %-13d | %-13s |\n",
+                fprintf(fp,"| %-10s | %-30s | %-15s | %-13d | %-13s |\n",
                         a[i].maSach,
                         a[i].name,
                         a[i].tacGia,
@@ -166,12 +165,13 @@ void add(book a[], int *n) {
             printf("Ten Sach (10 ky tu tro len): ");
             fflush(stdin);
             fgets(a[*n].name, sizeof(a[*n].name), stdin);
+           /* a[*n].name[strcspn(a[*n].name, "\n")] sẽ trỏ đến ký tự xuống dòng đầu tiên trong chuỗi a[*n].name
+            * và a[*n].name[strcspn(a[*n].name, "\n")] = '\0'; sẽ thay thế ký tự này bằng ký tự kết thúc chuỗi.
+            * Điều này có tác dụng loại bỏ ký tự xuống dòng khỏi chuỗi, giúp chuỗi dễ xử lý hơn trong các thao tác tiếp theo.*/
             a[*n].name[strcspn(a[*n].name, "\n")] = '\0';
+
         } while (strlen(a[*n].name) < 10);
-
-
         chuanHoa(a[*n].name);
-
         printf("Tac gia Sach: ");
         fflush(stdin);
         fgets(a[*n].tacGia, sizeof(a[*n].tacGia), stdin);
@@ -188,25 +188,18 @@ void add(book a[], int *n) {
             scanf("%d", &a[*n].gia);
             getchar();  // Loại bỏ ký tự '\n' thừa trong buffer
         } while (a[*n].gia < 1000);
-
-        // Ghi dữ liệu vào file sau mỗi lần thêm sách
-
-
         (*n)++;
-
-        printf("Ban co muon tiep tuc them sach? (1: Co, 0: Khong): ");
+        printf("Ban co muon tiep tuc them sach? (Nhap 1 de tiep tuc , nhap 0 de dung lai ): ");
         scanf("%d", &continueAdding);
         getchar();  // Loại bỏ ký tự '\n' thừa trong buffer
 
     } while (continueAdding == 1);
 }
 
-
-
 void in(book a[], int n) {
-    printf("%-20s%-20s%-20s%-20s%-10s\n", "masach", "Tensach", "tacgia", "gia", "theloai");
+    printf("%-20s%-30s%-20s%-10s%-10s\n", "Masach", "Tensach", "Tacgia", "Gia", "Theloai");
     for (int i = 0; i < n; ++i) {
-        printf("%-20s%-20s%-20s%-20d%-10s\n", a[i].maSach, a[i].name, a[i].tacGia, a[i].gia, a[i].theLoai);
+        printf("%-20s%-30s%-20s%-10d%-10s\n", a[i].maSach, a[i].name, a[i].tacGia, a[i].gia, a[i].theLoai);
     }
 }
 
@@ -247,7 +240,7 @@ void capNhatThongTinSach(book a[], int n) {
 
 
             printf("Cap nhat thong tin sach thanh cong!\n");
-            ghiDuLieuVaoFile(a, n);
+
             return;
         }
     }
@@ -274,7 +267,7 @@ void xoaSachTheoID(book a[], int *n) {
         }
         (*n)--;
         printf("Da xoa sach co ma %s\n", maSach);
-        ghiDuLieuVaoFile(a, *n);
+
     } else {
         printf("Khong tim thay sach voi ma sach da nhap!\n");
     }
@@ -312,17 +305,17 @@ void timKiemSachTheoTacGia(book a[], int n) {
     scanf(" %[^\n]", tacgia);
     chuanHoa(tacgia);
 
-    int found = 0;
+    int test = 0;
     printf("\nKet qua tim kiem theo tac gia '%s':\n", tacgia);
     for (int i = 0; i < n; i++) {
         if (strstr(a[i].tacGia, tacgia) != NULL) {
             printf("%s | %s | %s | %d | %s\n", a[i].maSach, a[i].name,
                    a[i].tacGia, a[i].gia, a[i].theLoai);
-            found = 1;
+            test = 1;
         }
     }
 
-    if (!found) {
+    if (!test) {
         printf("Khong tim thay sach cua tac gia '%s'\n", tacgia);
     }
 }
