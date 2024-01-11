@@ -74,11 +74,9 @@ int main() {
                 break;
             case 7:
                 timKiemSachTheoTacGia(a, n);
-                ghiDuLieuVaoFile(a,n);
                 break;
             case 8:
                 timKiemSachTheoKhoangGia(a,n);
-                ghiDuLieuVaoFile(a,n);
                 break;
             case 9:
                 xoaDuLieu();
